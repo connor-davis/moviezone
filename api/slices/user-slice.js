@@ -6,7 +6,9 @@ let userSlice = createSlice({
     info: {},
   },
   reducers: {
-    setInfo: (state, action) => {},
+    setInfo: (state, action) => {
+      state.info = action.payload;
+    },
   },
 });
 

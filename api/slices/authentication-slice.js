@@ -8,28 +8,15 @@ let authenticationSlice = createSlice({
     authenticationToken: "",
   },
   reducers: {
-    registerUser: async (state, action) => {
-      let response = await axios.post(
-        "/api/authentication/register",
-        action.payload
-      );
-
-      console.log(response);
-    },
-    loginUser: async (state, action) => {
-      let response = await axios.post(
-        "/api/authentication/login",
-        action.payload
-      );
-
-      console.log(response);
+    setAuthenticationToken: (state, action) => {
+      state.authenticationToken = action.payload;
     },
   },
 });
 
-let { registerUser, loginUser } = authenticationSlice.actions;
+let { setAuthenticationToken } = authenticationSlice.actions;
 
 let getAuthenticationToken = (store) =>
   store.authenticationReducer.authenticationToken;
 
-export { authenticationSlice, registerUser, loginUser, getAuthenticationToken };
+export { authenticationSlice, setAuthenticationToken, getAuthenticationToken };

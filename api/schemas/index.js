@@ -1,4 +1,4 @@
-let UserSchema = require("api/schemas/user");
+let UserSchema = require("./user");
 
 module.exports = {
   UserSchema,

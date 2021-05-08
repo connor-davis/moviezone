@@ -2,11 +2,32 @@ import React, { useState } from "react";
 
 import Head from "next/head";
 import Link from "next/link";
+import axios from "axios";
+import { setAuthenticationToken } from "../../api/slices/authentication-slice";
+import { setInfo } from "../../api/slices/user-slice";
+import { useDispatch } from "react-redux";
 
 let RegisterPage: React.FC = () => {
+  let dispatch = useDispatch();
+
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [confirmPassword, setConfirmPassword] = useState("");
+
+  let register = async () => {
+    let payload = {
+      username: "",
+      firstName: "",
+      lastName: "",
+      email,
+      password,
+    };
+
+    let response = await axios.post("/api/authentication/register", payload);
+
+    dispatch(setInfo(response.data.data));
+    dispatch(setAuthenticationToken(response.data.authenticationToken));
+  };
 
   return (
     <>
@@ -40,7 +61,10 @@ let RegisterPage: React.FC = () => {
               />
             </div>
 
-            <div className="flex flex-row flex-auto border-l border-t border-r border-b border-blue-900 px-3 py-2 hover:border-0 hover:bg-blue-900 rounded-md cursor-pointer mb-3">
+            <div
+              className="flex flex-row flex-auto border-l border-t border-r border-b border-blue-900 px-3 py-2 hover:border-0 hover:bg-blue-900 rounded-md cursor-pointer mb-3"
+              onClick={() => password === confirmPassword && register()}
+            >
               Continue
             </div>
             <div className="text-xs text-gray-700">

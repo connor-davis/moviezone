@@ -1,3 +1,3 @@
-let User = require("api/models/user");
+let User = require("./user");
 
 module.exports = { User };

@@ -16,19 +16,22 @@ let handle = app.getRequestHandler();
 
 let { routes } = require("./api");
 
+let { User } = require("./api/models");
+
+let { JwtStrategy } = require("./strategies/jwt");
+
 app
   .prepare()
   .then(() => {
     let server = express();
 
-    server.use("/api", routes);
-
     server.use(cors());
     server.use(json());
     server.use(urlencoded({ extended: true }));
-    server.use(passport.initialize());
-    server.use(passport.session());
     server.use(compression());
+    server.use(passport.initialize());
+
+    server.use("/api", routes);
 
     mongoose.connect(
       "mongodb://localhost:27017/moviezone",
@@ -46,6 +49,18 @@ app
 
     server.get("*", (request, response) => {
       return handle(request, response);
+    });
+
+    passport.use(JwtStrategy);
+
+    passport.serializeUser(function (user, done) {
+      done(null, user.userEmail);
+    });
+
+    passport.deserializeUser(function (userEmail, done) {
+      User.findOne({ userEmail }, function (err, user) {
+        done(err, user);
+      });
     });
 
     server.listen(3000, async () => {
