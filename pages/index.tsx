@@ -1,14 +1,14 @@
 import Head from "next/head";
-import Navbar from "../components/navbar";
 import React from "react";
 
 const Index: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Project Aurora | Welcome.</title>
+        <title>MovieZone | Welcome.</title>
       </Head>
-      <Navbar />
+
+      <h1>Home Page</h1>
     </>
   );
 };
