@@ -1,7 +1,7 @@
 import "../styles/global.css";
 
 import { Provider, useSelector } from "react-redux";
-import { persistor, store } from "./store";
+import { persistor, store } from "../api/store";
 
 import Navbar from "../components/navbar";
 import { PersistGate } from "redux-persist/integration/react";

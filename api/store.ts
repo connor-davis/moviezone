@@ -5,9 +5,9 @@ import {
 } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 
-import { authenticationSlice } from "../api/slices/authentication-slice";
+import { authenticationSlice } from "./slices/authentication-slice";
 import storage from "redux-persist/lib/storage";
-import { userSlice } from "../api/slices/user-slice";
+import { userSlice } from "./slices/user-slice";
 
 let userReducer = userSlice.reducer;
 let authenticationReducer = authenticationSlice.reducer;
